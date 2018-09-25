@@ -8,22 +8,20 @@ use Kimt\Model\Article;
 use Slim\Http\Response;
 use Kimt\Repository\ArticleRepository;
 
-class ArticleController
+class ArticleController extends Controller
 {
-    protected $container;
-
-    // constructor receives container instance
-    public function __construct($container) {
-        $this->container = $container;
-    }
  
     public function index(Request $request, Response $response){
-        
+
+            if ($this->container->flash) {
+                $messages = $this->container->flash->getMessages();
+            }
+
         $manager = new ArticleRepository($this->container);
         
         $articles = $manager->findAll();
         
-        return $this->container->view->render($response, 'article/index.html.twig', compact('articles'));
+        return $this->container->view->render($response, 'article/index.html.twig', compact('articles', 'messages'));
     }
 
     public function create(Request $request, Response $response) {
@@ -44,7 +42,12 @@ class ArticleController
             $article->setCategorie($categorie);
             $manager->save($article);
 
-            return $response->withStatus(200)->withHeader('Location', '/articles');
+            // Set flash message for next request
+            $this->container->flash->addMessage('success', 'Article ajouté!');
+
+            // Redirect
+            return $response->withStatus(302)->withHeader('Location', '/articles');
+            //return $response->withStatus(200)->withHeader('Location', '/articles');
         }
         return $this->container->view->render($response, 'article/create.html.twig');
 
@@ -97,7 +100,10 @@ class ArticleController
 
             $article = $manager->findOne($id);
             $manager->delete($article);
-            return $response->withStatus(200)->withHeader('Location', '/articles');
+            // Set flash message for next request
+            $this->container->flash->addMessage('danger', 'Article '.$article->getLibelle().' supprimer!');
+
+            return $response->withStatus(302)->withHeader('Location', '/articles');
         }
 
 

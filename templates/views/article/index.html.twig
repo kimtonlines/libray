@@ -1,12 +1,25 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+    {% if messages.success %}
+        <div class="alert alert-success" role="alert">
+            {% for message in messages.success %}
+            {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
+ {% if messages.danger %}
+        <div class="alert alert-danger" role="alert">
+            {% for message in messages.danger %}
+            {{ message }}
+            {% endfor %}
+        </div>
+    {% endif %}
 <legend><h1><a href="">Liste des articles</a></h1></legend>
-
-{% for article in articles %}
 <table class="table table-bordered table-striped table-condensed">
    <thead class="thead thead-inverse">
         <tr>
+            <th>N°</th>
             <th>Libellé</th>
             <th>Prix</th>
             <th>Categorie</th>
@@ -16,18 +29,19 @@
         </tr>
     </thead>
     <tbody>
+    {% for article in articles %}
         <tr>
-            <th> {{ article.libelle }} </th>
-            <th>{{ article.prix }}</th>
-            <th>{{ article.categorie }}</th>
-            <th><form action="{{ path_for('remove', { 'id': article.id }) }}" method="post">
+            <td> {{ loop.index }} </td>
+            <td> {{ article.libelle }} </td>
+            <td>{{ article.prix }}</td>
+            <td>{{ article.categorie }}</td>
+            <td><form action="{{ path_for('remove', { 'id': article.id }) }}" method="post">
                     <input type="hidden" name="_METHOD" value="DELETE"/>
-                    <button class="btn btn-danger">supprimer</button></form></th>
-            <th><a href="{{ path_for('edit', {'id': article.id}) }}" class="btn btn-info">Modifier</a><span class="glyphicon glyphicon-pencil"></span></th>
-            <th><a href="{{ path_for('show', {'id': article.id}) }}" class="btn btn-info">Voir</a><span class="glyphicon glyphicon-pencil"></span></th>
+                    <button class="btn btn-danger">supprimer</button></form></td>
+            <td><a href="{{ path_for('edit', {'id': article.id}) }}" class="btn btn-info">Modifier</a><span class="glyphicon glyphicon-pencil"></span></td>
+            <td><a href="{{ path_for('show', {'id': article.id}) }}" class="btn btn-info">Voir</a><span class="glyphicon glyphicon-pencil"></span></td>
         </tr>
+    {% endfor %}
     </tbody>
 </table>
-
-{% endfor %}
 {% endblock %}

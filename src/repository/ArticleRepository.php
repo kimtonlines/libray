@@ -35,7 +35,7 @@ class ArticleRepository
 
     public function findAll() {
 
-        $sql = $this->container->db->query("SELECT * FROM article");
+        $sql = $this->container->db->query("SELECT * FROM article ORDER BY id DESC ");
 
         while ($row = $sql->fetch()) {
             $article = new Article($row['id'], $row['libelle'], $row['prix'], $row['categorie']);

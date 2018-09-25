@@ -1,5 +1,8 @@
 <?php
 
+// Start PHP session
+session_start(); //by default requires session storage
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 use Slim\App;

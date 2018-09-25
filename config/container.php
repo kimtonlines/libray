@@ -23,3 +23,8 @@ $container['db'] = function () {
     
     return $db;
 };
+
+// Register provider
+$container['flash'] = function () {
+    return new \Slim\Flash\Messages();
+};
