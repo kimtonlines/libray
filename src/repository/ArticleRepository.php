@@ -6,22 +6,23 @@ require_once '../config/container.php';
 use ArrayObject;
 use PDO;
 use Kimt\Model\Article;
+use Slim\Container;
 
 class ArticleRepository
 {
     private $articles;
-    private $db;
+    private $container;
 
-    public function __construct()
+    public function __construct(Container $container)
     {
         $this->articles = new ArrayObject();
 
-        $this->db = new PDO('mysql:host=localhost;dbname=library','root','');
+        $this->container = $container;
     }
 
     public function save(Article $article) {
         
-        $sql = $this->db->prepare("INSERT INTO article(libelle, prix, categorie) VALUES(:libelle, :prix, :categorie)");
+        $sql = $this->container->db->prepare("INSERT INTO article(libelle, prix, categorie) VALUES(:libelle, :prix, :categorie)");
 
         $sql->bindValue(':libelle', $article->getLibelle());
         $sql->bindValue(':prix', $article->getPrix());
@@ -34,7 +35,7 @@ class ArticleRepository
 
     public function findAll() {
 
-        $sql = $this->db->query("SELECT * FROM article");
+        $sql = $this->container->db->query("SELECT * FROM article");
 
         while ($row = $sql->fetch()) {
             $article = new Article($row['id'], $row['libelle'], $row['prix'], $row['categorie']);
@@ -46,7 +47,7 @@ class ArticleRepository
 
     public function delete(Article $article) {
 
-        $sql = $this->db->prepare("DELETE FROM article WHERE id = :id ");
+        $sql = $this->container->db->prepare("DELETE FROM article WHERE id = :id ");
 
         $sql->bindParam('id', $article->getId());
         $sql->execute();
@@ -56,7 +57,7 @@ class ArticleRepository
     public function update(Article $article) {
 
 
-        $sql = $this->db->prepare("UPDATE article SET libelle = :libelle, prix = :prix, categorie = :categorie WHERE id = :id");
+        $sql = $this->container->db->prepare("UPDATE article SET libelle = :libelle, prix = :prix, categorie = :categorie WHERE id = :id");
 
         $sql->bindParam('libelle', $article->getLibelle());
         $sql->bindParam('prix', $article->getPrix());
@@ -75,7 +76,7 @@ class ArticleRepository
 
     public function findOne($id) {
 
-        $sql = $this->db->prepare('SELECT * FROM article WHERE id = :id');
+        $sql = $this->container->db->prepare('SELECT * FROM article WHERE id = :id');
 
         $sql->bindValue(':id', $id);
         $sql->execute();

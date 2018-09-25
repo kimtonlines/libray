@@ -19,7 +19,7 @@ class ArticleController
  
     public function index(Request $request, Response $response){
         
-        $manager = new ArticleRepository();
+        $manager = new ArticleRepository($this->container);
         
         $articles = $manager->findAll();
         
@@ -32,7 +32,7 @@ class ArticleController
 
         if ($request->getMethod() === 'POST') {
 
-            $manager = new ArticleRepository();
+            $manager = new ArticleRepository($this->container);
             $article = new Article();
 
             $libelle = $request->getParam('libelle');
@@ -54,7 +54,7 @@ class ArticleController
 
             $id = $args['id'];
 
-            $manager = new ArticleRepository();
+            $manager = new ArticleRepository($this->container);
             
             $article = $manager->findOne($id);
 
@@ -80,7 +80,7 @@ class ArticleController
 
         $id = $args['id'];
 
-        $manager = new ArticleRepository();
+        $manager = new ArticleRepository($this->container);
 
         $article = $manager->findOne($id);
 
@@ -93,7 +93,7 @@ class ArticleController
         if ($request->getMethod() === "DELETE") {
             $id = $args['id'];
 
-            $manager = new ArticleRepository();
+            $manager = new ArticleRepository($this->container);
 
             $article = $manager->findOne($id);
             $manager->delete($article);

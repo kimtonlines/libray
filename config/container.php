@@ -17,9 +17,9 @@ $container['view'] = function ($container) {
     return $view;
 };
 
-$container['db'] = function ($container) {
+$container['db'] = function () {
 
-    $db = new PDO('mysql:host=localhost;dbname=library','root','');
+    $db = new PDO('mysql:host=localhost;dbname=library','root','root');
     
     return $db;
 };
