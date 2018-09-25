@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<form method="post" action="">
+    <input type="hidden" name="_METHOD" value="PUT"/>
+<legend><h1><a href="">Modifier un article</a></h1></legend>
+        <div class="form-group">
+            <input type="text" name="libelle" value="{{ article.libelle }}" class="form-control" >
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" value="{{ article.prix }}" name="prix">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" name="categorie" >{{ article.categorie }}</textarea>
+        </div>
+        <div>
+           <button class="btn btn-info" name="enregistrer">Modifier</button>
+        </div>  
+</form>
+{% endblock %}

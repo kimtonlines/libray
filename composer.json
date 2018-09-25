@@ -8,8 +8,16 @@
             "email": "djabal@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Kimt\\Controller\\": "src/controllers",
+            "Kimt\\Repository\\": "src/repository",
+            "Kimt\\Model\\": "src/models"
+        }
+    },
     "require": {
         "slim/slim": "3.0",
-        "slim/twig-view": "^2.4"
+        "slim/twig-view": "^2.4",
+        "slim/csrf": "^0.8.3"
     }
 }

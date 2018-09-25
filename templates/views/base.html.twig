@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    
+    <title>Article</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+
+ 
+    <!--<link href="css/grid_layout_style.css" rel="stylesheet">-->
+</head>
+<body>
+<header id="header">
+	<div class="inner">
+	<!-- Logo -->
+	   <h1><a href="index.html" id="logo">Article</a></h1>
+		<!-- Nav -->
+			<nav id="nav">
+				<ul>
+					<li class="current_page_item"><a href="/articles">Accueil</a></li>
+          <li class=""><a href="{{ path_for('create') }}">Créer un article</a></li>
+          <li class=""><a href="{{ path_for('articles') }}">Voir les articles</a></li>
+				</ul>
+			</nav>
+
+	</div>
+</header>  
+<div class="container">  
+        <div class="row">
+            <div class="col-md-6">
+                 {% block body %}{% endblock %}
+            </div>
+        </div>
+    </div>
+
+     <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    &copy; 2013 <a target="_blank" href="http://shapebootstrap.net/" title="Free Twitter Bootstrap WordPress Themes and HTML templates">ShapeBootstrap</a>. All Rights Reserved.
+                </div>
+                
+            </div>
+        </div>
+    </footer><!--/#footer-->
+    <script src="../../bootstrap/js/jquery.js"></script>
+    <script src="../bootstrap/js/jquery.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap/bootstrap/js/bootstrap.js"></script>
+    <script src="../bootstrap/js/bootstrap.js"></script>
+</html>

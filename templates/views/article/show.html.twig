@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<legend><h1><a href="">Affichage de l'article</a></h1></legend>
+<form action="{{ path_for('remove', { 'id': article.id }) }}" method="post" >
+<table class="table table-bordered table-striped table-condensed">
+   <thead class="thead thead-inverse">
+        <tr>
+            <th>Libellé</th>
+            <th>Prix</th>
+            <th>Categorie</th>
+            <th>supprimer</th>
+            <th>Modifier</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th> {{ article.libelle }} </th>
+            <th>{{ article.prix }}</th>
+            <th>{{ article.categorie }}</th>
+            <th><form action="{{ path_for('remove', { 'id': article.id }) }}" method="post">
+                    <input type="hidden" name="_METHOD" value="DELETE"/>
+                    <button class="btn btn-danger">supprimer</button></form></th>
+            <th><a href="{{ path_for('edit', {'id': article.id}) }}" class="btn btn-info">Modifier</a><span class="glyphicon glyphicon-pencil"></span></th>
+        </tr>
+    </tbody>
+    </table>
+{% endblock %}
