@@ -16,7 +16,7 @@ class ArticleRepository
     {
         $this->articles = new ArrayObject();
 
-        $this->db = new PDO('mysql:host=localhost;dbname=library','root','root');
+        $this->db = new PDO('mysql:host=localhost;dbname=library','root','');
     }
 
     public function save(Article $article) {
